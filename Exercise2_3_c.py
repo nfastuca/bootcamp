@@ -1,6 +1,8 @@
+import os
 
 with open('data/salmonella_spi1_region.fna', 'r') as f:
     f_lines = f.readlines()
+    descriptor = f_lines[1]
     seq = ''.join(f_lines[1::])
     seq = seq.replace('\n', '')
     seq = seq.upper()
@@ -12,7 +14,8 @@ def gc_blocks(sequence, block_size):
     of GC in each chunk
     """
 
-    block_size = int(block_size)
+    if type(block_size)  != int or block_size<= 0:
+        raise RuntimeError('block_size is not a positive integer.')
 
     #split sequence into chunks of size 'block_size'
     start_indicies = range(0, len(sequence), block_size)
@@ -41,4 +44,15 @@ def gc_map(sequence, block_size, gc_thresh):
         else:
             gc_highlight += chunks[i].lower()
     return gc_highlight
-    
+
+#run gc_map function
+gc_map_salmonella = gc_map(seq, 1000, 0.45)
+
+#write result of gc_map function to new file
+with open('data/salmonella_spi1_region_gc_map.fasta', 'w') as f_out:
+    f_out.write(descriptor)
+    i = 0
+    while i < len(gc_map_salmonella) - 59:
+        f_out.write(gc_map_salmonella[i:i+60] + '\n')
+        i += 60
+    f_out.write(gc_map_salmonella[i:])
