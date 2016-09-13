@@ -8,4 +8,4 @@ def xa_to_diameter(xa):
     #compute diameter form area
     # A = pi d^2 / 4
     diameter = np.sqrt(xa *4.np.pi)
-    
+    return diameter
