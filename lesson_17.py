@@ -11,7 +11,8 @@ def one_to_three(seq):
             raise RuntimeError(amino_acid + ' is not a valid amino acid.')
 
     return ''.join(aa_list[:-1])
-try: 
+
+try:
     import gc_content
     have_gc = True
 except ImportError as e:

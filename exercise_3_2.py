@@ -49,7 +49,8 @@ def fold_change(R_to_K, KA=KA, Kd=Kd, K_switch=K_switch):
     K_switch*(1 + (c / Kd)**2)))
     return c, fold_change_model
 
-#iterate fold_change(R_to_K) over list of R/K values, appends to empty list
+#iterate fold_change(R_to_K) over list of R/K values, appends output to empty
+#list
 fold_change_models = []
 for val in RK:
     c, fold_change_model = fold_change(val)
@@ -57,6 +58,7 @@ for val in RK:
 
 
 #plot fold change v. log(c) for 3 data sets
+#***optimize to be included in other plot loop***
 plt.semilogx(c_IPTG_q18m, fold_change_q18m, marker='.', linestyle='none',
          markersize=20, alpha=0.5, color=colors['q18m'])
 plt.semilogx(c_IPTG_q18a, fold_change_q18a, marker='.', linestyle='none',
@@ -65,6 +67,7 @@ plt.semilogx(c_IPTG_wt, fold_change_wt, marker='.', linestyle='none',
          markersize=20, alpha=0.5, color=colors['wt'])
 
 #Loop through list of output data from fold_cange(R_to_K) and plot
+#***optimize to append tuples to use in plt.legend***
 for y, l in zip(fold_change_models, labels):
     plt.semilogx(c, y, color=colors[l])
 
