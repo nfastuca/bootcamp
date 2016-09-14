@@ -45,18 +45,16 @@ experimental_x = [c_IPTG_wt, c_IPTG_q18a, c_IPTG_q18m]
 bohr_par_range = np.linspace(-6, 6, 100)
 
 def bohr_parameter(c, R_to_K, Kd=Kd, KA=KA, K_switch=K_switch):
-    lnRK = np.log(R_to_K)
-    ln_fraction = np.log(((1 + c/KA)**2)/((1 + c/KA)**2 +
-                        (K_switch*(1 + c/Kd)**2)))
-    bohr_par = -1*(lnRK + ln_fraction)
-    par = (1 + np.exp((-1)*bohr_par))
-    return par
+    log_arg = (1 + c/KA)**2 / ((1 + c/KA)**2 + K_switch*(1 + c/Kd)**2)
+
+    return -np.log(R_to_K) - np.log(log_arg)
+
 
 def fold_change_bohr(bohr_parameter):
     """
 
     """
-    out = 1+ np.exp(bohr_parameter)**(-1)
+    out = (1+ np.exp(-bohr_parameter))**(-1)
     return out
 
 bohr_dist = fold_change_bohr(bohr_par_range)
