@@ -40,10 +40,32 @@ fold_change_wt = data_wt[:, 1]
 c = np.logspace(np.log10(np.min(c_IPTG_q18a)), np.log10(np.max(c_IPTG_q18a)),
                 num=100)
 
-def fold_change_bohr(c, R_to_K, Kd=Kd, KA=KA, K_switch=K_switch):
+def bohr_parameter(c, R_to_K, Kd=Kd, KA=KA, K_switch=K_switch):
     lnRK = np.log(R_to_K)
     ln_fraction = np.log(((1 + c/KA)**2)/((1 + c/KA)**2 +
-                  (K_switch*(1 + c/Kd)**2)))
+                        (K_switch*(1 + c/Kd)**2)))
     bohr_par = -1*(lnRK + ln_fraction)
     out = (1 + np.exp((-1)*bohr_par))
     return out
+
+
+bohr_par_range = np.linspace(-6, 6, 100)
+
+def fold_change_bohr(bohr_parameter, Kd=Kd, KA=KA, K_switch=K_switch):
+    """
+
+    """
+    out = (1+ np.exp(bohr_parameter)**-1
+    return out
+
+bohr_dist = fold_change_bohr(bohr_par_range)
+
+plt.plot(bohr_par_range, bohr_dist, color='gray')
+
+
+plt.semilogx(c_IPTG_q18m, fold_change_q18m, marker='.', linestyle='none',
+         markersize=20, alpha=0.5, color=colors['q18m'])
+plt.semilogx(c_IPTG_q18a, fold_change_q18a, marker='.', linestyle='none',
+         markersize=20, alpha=0.5, color=colors['q18a'])
+plt.semilogx(c_IPTG_wt, fold_change_wt, marker='.', linestyle='none',
+         markersize=20, alpha=0.5, color=colors['wt'])
