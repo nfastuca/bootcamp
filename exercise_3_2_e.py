@@ -70,4 +70,6 @@ plt.plot(bohr_par_range, bohr_dist, color='gray')
 
 #plot data sets
 for x, y, l in zip(bohrs, experimental_y, labels):
-    plt.plot(x, y, color=colors[l], markersize=20, linestyle='none', alpha=0.5)
+    plt.plot(x, y, color=colors[l], marker='.', markersize=20, linestyle='none', alpha=0.5)
+
+plt.show()
