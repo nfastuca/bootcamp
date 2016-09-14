@@ -34,9 +34,9 @@ def conf_int(data, n_reps=10000, perc=95.):
     return np.percentile(bs_reps(data, n_reps=n_reps), [((100. - perc)/2),
                         (100 - (100 -perc)/2)])
 
-for set, name in zip(beak_data, data_names):
-    perc_95 = conf_int(set)
-    print('95"%"confidence interval for', name, ':', perc_95)
+# for set, name in zip(beak_data, data_names):
+#     perc_95 = conf_int(set)
+#     print('95"%"confidence interval for', name, ':', perc_95)
 #report 95% confidence interval for 1975
 # conf_int_1975 = np.percentile(bs_replicates_1975, [2.5, 97.5])
 
@@ -50,10 +50,10 @@ for set, name in zip(beak_data, data_names):
 # #report 95% confidence interval for 2012
 # conf_int_2012 = np.percentile(bs_replicates_2012, [2.5, 97.5])
 #
-#
-# def ecdf(data):
-#     return np.sort(data), np.arange(1, len(data) + 1) / len(data)
-#
+
+def ecdf(data):
+    return np.sort(data), np.arange(1, len(data) + 1) / len(data)
+
 # print('conf_int_1975 = ', conf_int_1975, 'conf_int_2012 = ', conf_int_2012)
 
 # x_1975, y_1975 = ecdf(bd_1975)
