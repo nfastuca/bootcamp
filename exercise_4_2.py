@@ -19,5 +19,10 @@ plt.xlabel('Bee Weight', size=20)
 plt.ylabel('ECDF', size=20)
 plt.legend(('Pesticide', 'Control'), loc='lower right', fontsize=12)
 
+#compute mean weights
+p_mean = np.mean(p_weights)
+c_mean = np.mean(c_weights)
+
+#compute 95% confidence intervals
 p_ci= hs.conf_int(p_weights)
 c_ci = hs.conf_int(c_weights)
