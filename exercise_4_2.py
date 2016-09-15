@@ -18,4 +18,6 @@ plt.plot(x_cw, y_cw, marker='.', linestyle='none', markersize=10, alpha=0.5)
 plt.xlabel('Bee Weight', size=20)
 plt.ylabel('ECDF', size=20)
 plt.legend(('Pesticide', 'Control'), loc='lower right', fontsize=12)
-plt.show()
+
+p_ci= hs.conf_int(p_weights)
+c_ci = hs.conf_int(c_weights)
