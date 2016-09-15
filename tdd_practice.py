@@ -1,4 +1,4 @@
-def find_codon_lesson6(codon, seq):
+def find_codon(codon, seq):
     """Find a specified codon with a given sequence."""
 
     i = 0
@@ -9,4 +9,3 @@ def find_codon_lesson6(codon, seq):
         return -1
 
     return i
-    
