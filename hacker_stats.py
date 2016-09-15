@@ -26,6 +26,18 @@ def bs_reps(data, n_reps=10000):
         bs_reps[i] = np.mean(bs_sample_out)
     return bs_reps
 
+def bs_reps_median(data, n_reps=10000):
+    """
+    Generates 'n_reps' number of bootstrap data sets from original data and
+    appends them to an empty array.  Returns 1-d array of bootstrap data sets
+    of shape (n_reps,)
+    """
+    bs_reps = np.empty(n_reps)
+    for i in range(n_reps):
+        bs_sample_out = bs_sample(data)
+        bs_reps[i] = np.median(bs_sample_out)
+    return bs_reps
+
 def conf_int(data, n_reps=10000, perc=95.):
     """
     Calculates 'perc' $%$ confidence interval for data by running 'n_reps'
@@ -33,7 +45,13 @@ def conf_int(data, n_reps=10000, perc=95.):
     """
     return np.percentile(bs_reps(data, n_reps=n_reps), [((100. - perc)/2),
                         (100 - (100 -perc)/2)])
-
+def conf_int_median(data, n_reps=10000, perc=95.):
+    """
+    Calculates 'perc' $%$ confidence interval for the median data by running
+    'n_reps' bootstrap experiment replications
+    """
+    return np.percentile(bs_reps_median(data, n_reps=n_reps), [((100. - perc)/2),
+                        (100 - (100 -perc)/2)])
 # for set, name in zip(beak_data, data_names):
 #     perc_95 = conf_int(set)
 #     print('95"%"confidence interval for', name, ':', perc_95)
