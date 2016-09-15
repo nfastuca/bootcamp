@@ -37,13 +37,18 @@ c_sperm_ci = hs.conf_int(c_sperm)
 p_sperm_ci_median = hs.conf_int_median(p_sperm)
 c_sperm_ci_median = hs.conf_int_median(c_sperm)
 
+#close any open plots
+plt.close()
+
+
 #plot ecdf of weights
 plt.plot(x_pw, y_pw, marker='.', linestyle='none', markersize=10, alpha=0.5)
 plt.plot(x_cw, y_cw, marker='.', linestyle='none', markersize=10, alpha=0.5)
 plt.xlabel('Bee Weight', size=20)
 plt.ylabel('ECDF', size=20)
 plt.legend(('Pesticide', 'Control'), loc='lower right', fontsize=12)
-plt.savefig('bee_weight_ECDF.svg, bbox_inches='tight')
+plt.savefig('bee_weight_ECDF.svg', bbox_inches='tight')
+plt.close()
 
 #Plot ecdf of sperm qualities
 plt.plot(x_ps, y_ps, marker='.', linestyle='none', markersize=10, alpha=0.5)
@@ -51,4 +56,4 @@ plt.plot(x_cs, y_cs, marker='.', linestyle='none', markersize=10, alpha=0.5)
 plt.xlabel('Bee Sperm Quality', size=20)
 plt.ylabel('ECDF', size=20)
 plt.legend(('Pesticide', 'Control'), loc='lower right', fontsize=12)
-plt.savefig('bee_sperm_ECDF.svg, bbox_inches='tight')
+plt.savefig('bee_sperm_ECDF.svg', bbox_inches='tight')
