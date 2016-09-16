@@ -66,6 +66,7 @@ im_cells = np.copy(seg_lab) > 0
 #removing segments smaller than 300
 for i, _ in enumerate(areas):
     if areas[i] < cutoff:
+        #this line confuses me
         im_cells[seg_lab==props[i].label] = 0
 
 area_filt_lab = skimage.measure.label(im_cells)
