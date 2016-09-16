@@ -89,5 +89,3 @@ def area_cells(phase_im, low=300, high=700):
             n += 1
 
     return im_bw_filt, n
-
-im_labeled, labels = area_cells(phase_im)
